@@ -35,60 +35,30 @@ function fetchEvents(q, page) {
     .catch(error => console.log(error));
 }
 
-// function getEvents(query, page) {
-// fetchEvents(query, page).then(data => {
-//   if (data.totalHits === 0) {
-//     alert(
-//       'Sorry, there are no images matching your search query. Please try again.'
-//     );
-//     return;
-//   }
-//   const images = data.hits;
-//   console.log(images);
-//   renderEvents(images);
-//   if (data.totalHits > 1) {
-//     btnImgload.style.display = 'block';
-//   } else {
-//     renderEvents(images);
-//     if (data.page === 2) {
-//       alert(`Hooray! We found ${images.totalHits} images.`);
-//     }
-//     if (data.totalHits <= (data.page - 1) * 40) {
-//       alert("We're sorry, but you've reached the end of search results.");
-//       btnImgload.style.display = 'none';
-//     } else {
-//       btnImgload.style.display = 'block';
-//     }
-//   }
-// });
-// }
-
 function getEvents(query, page) {
   fetchEvents(query, page).then(data => {
     if (data.totalHits === 0) {
-      alert(
+      Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
       btnImgload.style.display = 'none';
       return;
     } else {
-      const images = data.hits;
-      renderEvents(images);
-      if (data.totalHits > 1) {
-        btnImgload.style.display = 'block';
+      renderEvents(data.hits);
+      if (data.totalHits > 40) {
+        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
       } else {
-        renderEvents(images);
-        if (data.page === 2) {
-          alert(`Hooray! We found ${data.totalHits} images.`);
-        }
-        if (data.totalHits <= (data.page - 1) * 40) {
-          alert("We're sorry, but you've reached the end of search results.");
+        if (data.totalHits <= 40) {
           btnImgload.style.display = 'none';
+          Notiflix.Notify.failure(
+            "We're sorry, but you've reached the end of search results."
+          );
         } else {
           btnImgload.style.display = 'block';
         }
       }
     }
+
     const images = data.hits;
     console.log(images);
     renderEvents(images);
