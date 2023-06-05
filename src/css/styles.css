@@ -1,0 +1,29 @@
+.search-form {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(41, 95, 242);
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.photo-card {
+  flex-basis: calc((100% - 10px * 3) / 4);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 50px;
+}
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
