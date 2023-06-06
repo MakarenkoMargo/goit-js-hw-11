@@ -34,6 +34,9 @@ const observer = new IntersectionObserver(
 
 async function getEvents(query, page) {
   isLoading = true;
+  if (!isLoading) {
+    return;
+  }
 
   const data = await fetchEvents(query, page);
 
